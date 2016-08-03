@@ -15,8 +15,5 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		dbHelper =new CoolWeatherOpenHelper(this, "Weather.db", null, 1);
-		dbHelper.getWritableDatabase();
-		
-	}
+		}
 }
