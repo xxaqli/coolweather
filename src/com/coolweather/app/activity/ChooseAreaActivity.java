@@ -52,12 +52,17 @@ public class ChooseAreaActivity extends Activity {
 	//当前选中的级别
 	private int currentLevel;
 	
+	//判断是否从WeatherActivity中跳转过来
+	private boolean isFromWeatherActivity;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		isFromWeatherActivity=getIntent().getBooleanExtra("from_weather_activity", false);
 		/*实现活动跳转到WeatherActivity*/
 		SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(this);
-		if(prefs.getBoolean("city_selected", false)){	//如果已经到达选中city的层次，那么进行以下查询天气跳转操作
+		//如果已经选择了城市，且不是从WeatherActivity中跳转过来，才会直接跳转到WeatherActivity,否则停留在当前界面，选择其他城市
+		if(prefs.getBoolean("city_selected", false) && !isFromWeatherActivity){	//如果已经到达选中city的层次，那么进行以下查询天气跳转操作
 			Intent intent=new Intent(this,WeatherActivity.class);
 			startActivity(intent);
 			finish();
